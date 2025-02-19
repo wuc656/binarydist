@@ -1,7 +1,6 @@
 package binarydist
 
 import (
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"testing"
@@ -11,7 +10,7 @@ func TestPatch(t *testing.T) {
 	mustWriteRandFile("test.old", 1e3, 1)
 	mustWriteRandFile("test.new", 1e3, 2)
 
-	got, err := ioutil.TempFile("/tmp", "bspatch.")
+	got, err := os.CreateTemp(os.TempDir(), "bspatch.")
 	if err != nil {
 		panic(err)
 	}
@@ -39,7 +38,7 @@ func TestPatch(t *testing.T) {
 }
 
 func TestPatchHk(t *testing.T) {
-	got, err := ioutil.TempFile("/tmp", "bspatch.")
+	got, err := os.CreateTemp(os.TempDir(), "bspatch.")
 	if err != nil {
 		panic(err)
 	}
